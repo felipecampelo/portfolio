@@ -85,7 +85,7 @@ const { Content } = await render(entry);
 	}
 
 	.content {
-		max-width: 65ch;
+		max-width: 100ch;
 		margin-inline: auto;
 	}
 
@@ -118,6 +118,56 @@ const { Content } = await render(entry);
 		color: var(--gray-0);
 	}
 
+	.content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: var(--text-sm);
+		margin: 1.25rem 0;
+		border: 1px solid var(--gray-800);
+	}
+
+	.content :global(thead) {
+		background: var(--gray-900);
+	}
+
+	.content :global(th),
+	.content :global(td) {
+		padding: 0.65rem 0.85rem;
+		border: 1px solid var(--gray-800);
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	.content :global(th) {
+		font-weight: 600;
+		font-family: var(--font-brand);
+	}
+
+	.content :global(td code) {
+		font-size: 0.9em;
+	}
+
+	.content :global(.table-with-total-footer tbody tr:last-child td) {
+		font-weight: 600;
+		background: var(--gray-900);
+	}
+
+	.content :global(table) {
+	border-collapse: collapse;
+	width: 100%;
+	}
+
+	.content :global(th) {
+		background: #581c87;
+		color: white;
+		padding: 0.6rem;
+	}
+
+	.content :global(td) {
+		padding: 0.6rem;
+		border-top: 1px solid var(--gray-800);
+	}
+	
 	.back-link,
 	.content :global(a) {
 		text-decoration: 1px solid underline transparent;
