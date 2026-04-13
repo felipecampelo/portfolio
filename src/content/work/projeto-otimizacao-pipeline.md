@@ -8,6 +8,7 @@ description: |
 tags:
   - Synapse
   - PySpark
+  - SQL
   - PostgreSQL
   - AWS
   - Azure
