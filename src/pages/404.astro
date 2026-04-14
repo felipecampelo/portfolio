@@ -1,9 +1,10 @@
 ---
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { defaultLocale } from '../i18n/config';
 import { useUi } from '../i18n/ui';
 
-const lang = 'pt';
+const lang = defaultLocale;
 const t = useUi(lang);
 ---
 

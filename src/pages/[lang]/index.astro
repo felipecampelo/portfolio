@@ -9,7 +9,7 @@ import Pill from '../../components/Pill.astro';
 import PortfolioPreview from '../../components/PortfolioPreview.astro';
 import Skills from '../../components/Skills.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { locales, isLocale, type Locale } from '../../i18n/config';
+import { defaultLocale, locales, isLocale, type Locale } from '../../i18n/config';
 import { sitePath, workIndexPath } from '../../i18n/paths';
 import { useUi } from '../../i18n/ui';
 import { workForLocale } from '../../i18n/work';
@@ -23,7 +23,7 @@ export function getStaticPaths() {
 
 const langParam = Astro.params.lang;
 if (!isLocale(langParam)) {
-	return Astro.redirect(sitePath('pt/'));
+	return Astro.redirect(sitePath(`${defaultLocale}/`));
 }
 const lang: Locale = langParam;
 const t = useUi(lang);
@@ -357,9 +357,41 @@ const projects = workForLocale(allWork, lang)
 		}
 	}
 
+	.certifications .databricks {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.5rem 0.625rem;
+	}
+
 	.certifications img {
-	height: 150px; /* opcional para padronizar tamanho */
-	width: 150;
+		width: 100%;
+		max-width: 9rem;
+		height: auto;
+		max-height: 3.75rem;
+		margin-inline: auto;
+		display: block;
+		object-fit: contain;
+	}
+
+	@media (min-width: 30em) {
+		.certifications .databricks {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.certifications img {
+			max-height: 4.25rem;
+		}
+	}
+
+	@media (min-width: 50em) {
+		.certifications .databricks {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
+		.certifications img {
+			max-width: 11rem;
+			max-height: 6.25rem;
+		}
 	}
 
 	/* ====================================================== */
@@ -480,6 +512,17 @@ const projects = workForLocale(allWork, lang)
 	justify-self: flex-start;
 	text-align: left;
 	max-width: 60ch;
+}
+
+/* Mesma hierarquia visual de "Projetos em destaque" (h3 + override), evitando o h2 global (--text-4xl) no mobile */
+.data-stack-session .section-header h2 {
+	font-size: var(--text-2xl);
+}
+
+@media (min-width: 50em) {
+	.data-stack-session .section-header h2 {
+		font-size: var(--text-4xl);
+	}
 }
 
 /* Container geral */

@@ -1,4 +1,4 @@
-import type { Locale } from './config';
+import { defaultLocale, type Locale } from './config';
 
 /** Path under the site root (with Astro `base` applied). */
 export function sitePath(pathFromRoot: string): string {
@@ -57,5 +57,5 @@ export function pathWithLocale(pathname: string, target: Locale): string {
 		return sitePath(full.slice(1));
 	}
 
-	return sitePath(target === 'pt' ? 'pt/' : 'en/');
+	return sitePath(`${defaultLocale}/`);
 }

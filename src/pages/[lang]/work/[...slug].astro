@@ -6,7 +6,7 @@ import Hero from '../../../components/Hero.astro';
 import Icon from '../../../components/Icon.astro';
 import Pill from '../../../components/Pill.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { isLocale, type Locale } from '../../../i18n/config';
+import { defaultLocale, isLocale, type Locale } from '../../../i18n/config';
 import { sitePath, workIndexPath } from '../../../i18n/paths';
 import { assetUrl } from '../../../utils/assetUrl';
 import { useUi } from '../../../i18n/ui';
@@ -30,7 +30,7 @@ export async function getStaticPaths() {
 
 const langParam = Astro.params.lang;
 if (!isLocale(langParam)) {
-	return Astro.redirect(sitePath('pt/work/'));
+	return Astro.redirect(sitePath(`${defaultLocale}/work/`));
 }
 const lang: Locale = langParam;
 
@@ -86,11 +86,16 @@ const t = useUi(lang);
 		gap: 1.5rem;
 		justify-content: space-between;
 		align-items: center;
+		width: 100%;
+		max-width: 100%;
 	}
 
 	.tags {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 0.5rem;
+		justify-content: center;
+		max-width: 100%;
 	}
 
 	.description {
@@ -205,6 +210,11 @@ const t = useUi(lang);
 		.details {
 			flex-direction: row;
 			gap: 2.5rem;
+			align-items: flex-start;
+		}
+
+		.tags {
+			justify-content: flex-start;
 		}
 
 		.content :global(blockquote) {
