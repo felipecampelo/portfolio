@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { assetUrl } from '../utils/assetUrl';
 
 interface Props {
 	title?: string | undefined;
@@ -18,7 +19,7 @@ const {
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 
-<link rel="icon" type="image/svg+xml" href="/assets/portrait-sem-fundo.png" />
+<link rel="icon" type="image/svg+xml" href={assetUrl('/assets/portrait-sem-fundo.png')} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link

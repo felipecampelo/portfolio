@@ -26,13 +26,18 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 	{ label: 'GitHub', href: 'https://github.com/felipecampelo', icon: 'github-logo' },
 ];
 
+const toComparable = (u: string) => {
+	let p = u.replace(import.meta.env.BASE_URL, '');
+	if (p.at(0) !== '/') p = '/' + p;
+	if (p.at(-1) !== '/') p += '/';
+	return p;
+};
+const pathname = toComparable(pathnameProp);
 const isCurrentPage = (href: string) => {
-	let pathname = pathnameProp.replace(import.meta.env.BASE_URL, '');
-	if (pathname.at(0) !== '/') pathname = '/' + pathname;
-	if (pathname.at(-1) !== '/') pathname += '/';
-	const homeHref = homePath(lang);
-	if (href === homeHref) return pathname === homeHref;
-	return pathname === href || pathname.startsWith(href);
+	const h = toComparable(href);
+	const home = toComparable(homePath(lang));
+	if (h === home) return pathname === home;
+	return pathname === h || pathname.startsWith(h);
 };
 ---
 
