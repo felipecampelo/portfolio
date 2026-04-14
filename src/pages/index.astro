@@ -1,5 +1,6 @@
 ---
+import { defaultLocale } from '../i18n/config';
 import { sitePath } from '../i18n/paths';
 
-return Astro.redirect(sitePath('pt/'), 302);
+return Astro.redirect(sitePath(`${defaultLocale}/`), 302);
 ---
