@@ -1,8 +1,12 @@
 ---
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { useUi } from '../i18n/ui';
+
+const lang = 'pt';
+const t = useUi(lang);
 ---
 
-<BaseLayout title="Not Found" description="404 Error — this page was not found">
-	<Hero title="Page Not Found" tagline="Not found" />
+<BaseLayout lang={lang} title={t.notFoundTitle} description={t.notFoundDescription}>
+	<Hero title={t.notFoundHero} tagline={t.notFoundTagline} />
 </BaseLayout>

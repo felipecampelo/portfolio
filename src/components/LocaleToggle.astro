@@ -1,0 +1,77 @@
+---
+import type { Locale } from '../i18n/config';
+import { pathWithLocale } from '../i18n/paths';
+import { useUi } from '../i18n/ui';
+
+interface Props {
+	lang: Locale;
+	pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const t = useUi(lang);
+const hrefPt = pathWithLocale(pathname, 'pt');
+const hrefEn = pathWithLocale(pathname, 'en');
+const navLabel = lang === 'pt' ? t.localeSwitchToEn : t.localeSwitchToPt;
+---
+
+<div class="locale-toggle" role="navigation" aria-label={navLabel}>
+	<a
+		href={hrefPt}
+		class:list={['locale-link', { active: lang === 'pt' }]}
+		aria-current={lang === 'pt' ? 'page' : undefined}>{t.localeShortPt}</a>
+	<a
+		href={hrefEn}
+		class:list={['locale-link', { active: lang === 'en' }]}
+		aria-current={lang === 'en' ? 'page' : undefined}>{t.localeShortEn}</a>
+</div>
+
+<style>
+	.locale-toggle {
+		display: flex;
+		align-items: stretch;
+		/* Same outer height as ThemeToggle’s `<button>` (each `.icon` is 2rem tall). */
+		height: 2rem;
+		min-width: 5rem;
+		border-radius: 999rem;
+		background-color: var(--gray-999);
+		box-shadow: inset 0 0 0 1px var(--accent-overlay);
+		overflow: hidden;
+	}
+
+	.locale-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		padding: 0 0.45rem;
+		min-width: 0;
+		flex: 1 1 50%;
+		font-family: var(--font-brand);
+		font-size: 0.8125rem;
+		line-height: 1;
+		font-weight: 600;
+		color: var(--accent-overlay);
+		text-decoration: none;
+		transition:
+			color var(--theme-transition),
+			background-color var(--theme-transition);
+	}
+
+	.locale-link:hover,
+	.locale-link:focus-visible {
+		color: var(--gray-0);
+		background-color: var(--accent-subtle-overlay);
+	}
+
+	.locale-link.active {
+		background-color: var(--accent-regular);
+		color: var(--accent-text-over);
+	}
+
+	.locale-link.active:hover,
+	.locale-link.active:focus-visible {
+		color: var(--accent-text-over);
+		background-color: var(--accent-regular);
+	}
+</style>

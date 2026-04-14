@@ -1,22 +1,31 @@
 ---
 import Icon from './Icon.astro';
+import type { Locale } from '../i18n/config';
+import { useUi } from '../i18n/ui';
+
+interface Props {
+	lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useUi(lang);
 ---
 
 <section class="box skills">
 	<div class="stack gap-2 lg:gap-4">
 		<Icon icon="terminal-window" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h2>Maturidade Comprovada</h2>
-		<p>Experiência sólida em engenharia de dados, analytics, DevOps e MLOps, atuando em ambientes produtivos de alta complexidade.</p>
+		<h2>{t.skillsBlock1Title}</h2>
+		<p>{t.skillsBlock1Body}</p>
 	</div>
 	<div class="stack gap-2 lg:gap-4">
 		<Icon icon="trophy" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h2>Liderança Técnica</h2>
-		<p>Experiência como Team Lead técnico, apoiando times, definindo padrões e tomando decisões arquiteturais com visão de longo prazo.</p>
+		<h2>{t.skillsBlock2Title}</h2>
+		<p>{t.skillsBlock2Body}</p>
 	</div>
 	<div class="stack gap-2 lg:gap-4">
 		<Icon icon="strategy" color="var(--accent-regular)" size="2.5rem" gradient />
-		<h2>Foco em impacto</h2>
-		<p>Foco em gerar valor real para o negócio, transformando dados em soluções práticas, escaláveis e mensuráveis.</p>
+		<h2>{t.skillsBlock3Title}</h2>
+		<p>{t.skillsBlock3Body}</p>
 	</div>
 </section>
 

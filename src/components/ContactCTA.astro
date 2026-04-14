@@ -1,12 +1,21 @@
 ---
 import CallToAction from './CallToAction.astro';
 import Icon from './Icon.astro';
+import type { Locale } from '../i18n/config';
+import { useUi } from '../i18n/ui';
+
+interface Props {
+	lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useUi(lang);
 ---
 
 <aside>
-	<h2 >Vamos fazer network?</h2>
+	<h2>{t.contactHeading}</h2>
 	<CallToAction href="https://www.linkedin.com/in/scampelo/">
-		Mande-me uma mensagem
+		{t.contactCta}
 		<Icon icon="paper-plane-tilt" size="1.2em" />
 	</CallToAction>
 </aside>
