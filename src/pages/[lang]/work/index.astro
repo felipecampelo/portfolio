@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import ContactCTA from '../../../components/ContactCTA.astro';
+import Grid from '../../../components/Grid.astro';
+import Hero from '../../../components/Hero.astro';
+import PortfolioPreview from '../../../components/PortfolioPreview.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { locales, isLocale, type Locale } from '../../../i18n/config';
+import { useUi } from '../../../i18n/ui';
+import { workForLocale } from '../../../i18n/work';
+
+export function getStaticPaths() {
+	return locales.map((lang) => ({ params: { lang } }));
+}
+
+const langParam = Astro.params.lang;
+if (!isLocale(langParam)) {
+	return Astro.redirect('/pt/work/');
+}
+const lang: Locale = langParam;
+const t = useUi(lang);
+
+const allWork = await getCollection('work');
+const projects = workForLocale(allWork, lang).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+---
+
+<BaseLayout lang={lang} title={t.workMetaTitle} description={t.workMetaDescription}>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero title={t.workHeroTitle} tagline={t.workHeroTagline} align="start" />
+			<Grid variant="offset">
+				{
+					projects.map((project) => (
+						<li>
+							<PortfolioPreview lang={lang} project={project} />
+						</li>
+					))
+				}
+			</Grid>
+		</main>
+		<ContactCTA lang={lang} />
+	</div>
+</BaseLayout>

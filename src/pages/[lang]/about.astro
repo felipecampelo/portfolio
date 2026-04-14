@@ -1,0 +1,104 @@
+---
+import AboutBodyEn from '../../components/about/AboutBodyEn.astro';
+import AboutBodyPt from '../../components/about/AboutBodyPt.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import Hero from '../../components/Hero.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { locales, isLocale, type Locale } from '../../i18n/config';
+import { useUi } from '../../i18n/ui';
+
+export function getStaticPaths() {
+	return locales.map((lang) => ({ params: { lang } }));
+}
+
+const langParam = Astro.params.lang;
+if (!isLocale(langParam)) {
+	return Astro.redirect('/pt/about/');
+}
+const lang: Locale = langParam;
+const t = useUi(lang);
+---
+
+<BaseLayout lang={lang} title={t.aboutMetaTitle} description={t.aboutMetaDescription}>
+	<div class="stack gap-20">
+		<main class="wrapper about">
+			<Hero title={t.aboutHeroTitle} tagline={t.aboutHeroTagline}>
+				<img width="1553" height="873" src="/assets/portrait-gemini.png" alt={t.aboutPortraitAlt} />
+			</Hero>
+
+			{lang === 'pt' ? <AboutBodyPt /> : <AboutBodyEn />}
+		</main>
+
+		<ContactCTA lang={lang} />
+	</div>
+</BaseLayout>
+
+<style>
+	/**
+	 * Child components (AboutBodyPt / AboutBodyEn) do not receive this file’s scoped
+	 * attributes, so selectors that target their DOM must use :global(...) under .about.
+	 */
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+	}
+
+	.about :global(.role-highlight) {
+		color: #a855f7;
+	}
+
+	.about :global(.education-highlight) {
+		color: #60a5fa;
+	}
+
+	.about :global(img) {
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	.about :global(section) {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: var(--gray-200);
+	}
+
+	.about :global(.section-title) {
+		grid-column-start: 1;
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+	}
+
+	.about :global(.content) {
+		grid-column: 2 / 4;
+	}
+
+	.about :global(.content a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.about :global(.content a:hover),
+	.about :global(.content a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 60% 1fr;
+		}
+
+		.about > :global(:first-child) {
+			grid-column-start: 2;
+		}
+
+		.about :global(section) {
+			display: contents;
+			font-size: var(--text-lg);
+		}
+	}
+</style>
