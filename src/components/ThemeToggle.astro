@@ -1,10 +1,16 @@
 ---
 import Icon from './Icon.astro';
+
+interface Props {
+	toggleLabel?: string;
+}
+
+const { toggleLabel = 'Toggle light and dark color theme' } = Astro.props;
 ---
 
 <theme-toggle>
 	<button>
-		<span class="sr-only">Dark theme</span>
+		<span class="sr-only">{toggleLabel}</span>
 		<span class="icon light"><Icon icon="sun" /></span>
 		<span class="icon dark"><Icon icon="moon-stars" /></span>
 	</button>

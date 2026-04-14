@@ -1,14 +1,20 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import type { Locale } from '../i18n/config';
+import { workDetailPath } from '../i18n/paths';
+import { workSlugFromId } from '../i18n/work';
 
 interface Props {
 	project: CollectionEntry<'work'>;
+	lang: Locale;
 }
 
-const { data, id } = Astro.props.project;
+const { project, lang } = Astro.props;
+const { data, id } = project;
+const slug = workSlugFromId(id);
 ---
 
-<a class="card" href={`/work/${id}`}>
+<a class="card" href={workDetailPath(lang, slug)}>
 	<span class="title">{data.title}</span>
 	<img src={data.img} alt={data.img_alt || ''} loading="lazy" decoding="async" />
 </a>

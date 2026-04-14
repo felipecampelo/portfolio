@@ -1,40 +1,51 @@
 ---
 import Icon from './Icon.astro';
 import type { iconPaths } from './IconPaths';
+import LocaleToggle from './LocaleToggle.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import type { Locale } from '../i18n/config';
+import { aboutPath, homePath, workIndexPath } from '../i18n/paths';
+import { useUi } from '../i18n/ui';
 
-/** Main menu items */
+interface Props {
+	lang: Locale;
+	pathname: string;
+}
+
+const { lang, pathname: pathnameProp } = Astro.props;
+const t = useUi(lang);
+
 const textLinks: { label: string; href: string }[] = [
-	{ label: 'Home', href: '/' },
-	{ label: 'Projetos', href: '/work/' },
-	{ label: 'Sobre mim', href: '/about/' },
+	{ label: t.navHome, href: homePath(lang) },
+	{ label: t.navWork, href: workIndexPath(lang) },
+	{ label: t.navAbout, href: aboutPath(lang) },
 ];
 
-/** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
 	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/scampelo/', icon: 'linkedin-logo' },
 	{ label: 'GitHub', href: 'https://github.com/felipecampelo', icon: 'github-logo' },
 ];
 
-/** Test if a link is pointing to the current page. */
 const isCurrentPage = (href: string) => {
-	let pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+	let pathname = pathnameProp.replace(import.meta.env.BASE_URL, '');
 	if (pathname.at(0) !== '/') pathname = '/' + pathname;
 	if (pathname.at(-1) !== '/') pathname += '/';
-	return pathname === href || (href !== '/' && pathname.startsWith(href));
+	const homeHref = homePath(lang);
+	if (href === homeHref) return pathname === homeHref;
+	return pathname === href || pathname.startsWith(href);
 };
 ---
 
 <nav>
 	<div class="menu-header">
-		<a href="/" class="site-title">
+		<a href={homePath(lang)} class="site-title">
 			<Icon icon="terminal-window" color="var(--accent-regular)" size="1.6em" gradient />
-			Felipe Campelo
+			{t.siteTitle}
 		</a>
 		<menu-button>
 			<template>
 				<button class="menu-button" aria-expanded="false">
-					<span class="sr-only">Menu</span>
+					<span class="sr-only">{t.navMenu}</span>
 					<Icon icon="list" />
 				</button>
 			</template>
@@ -91,8 +102,13 @@ const isCurrentPage = (href: string) => {
 				}
 			</div>
 
-			<div class="theme-toggle">
-				<ThemeToggle />
+			<div class="menu-actions">
+				<div class="locale-toggle-wrap">
+					<LocaleToggle lang={lang} pathname={pathnameProp} />
+				</div>
+				<div class="theme-toggle">
+					<ThemeToggle toggleLabel={t.themeToggleSr} />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -227,11 +243,24 @@ const isCurrentPage = (href: string) => {
 
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		gap: 0.75rem;
 		padding: 1.5rem 2rem 1.5rem 1.5rem;
 		background-color: var(--gray-999);
 		border-radius: 0 0 0.75rem 0.75rem;
 		box-shadow: var(--shadow-lg);
+	}
+
+	.menu-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-shrink: 0;
+	}
+
+	.locale-toggle-wrap {
+		display: flex;
+		align-items: center;
 	}
 
 	.socials {
@@ -328,6 +357,10 @@ const isCurrentPage = (href: string) => {
 			padding: 0;
 			background-color: transparent;
 			box-shadow: none;
+		}
+
+		.menu-actions {
+			gap: 0.625rem;
 		}
 
 		.socials {
