@@ -1,3 +1,5 @@
 ---
-return Astro.redirect('/pt/work/', 302);
+import { sitePath } from '../../i18n/paths';
+
+return Astro.redirect(sitePath('pt/work/'), 302);
 ---

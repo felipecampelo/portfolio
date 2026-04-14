@@ -10,9 +10,12 @@ import PortfolioPreview from '../../components/PortfolioPreview.astro';
 import Skills from '../../components/Skills.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { locales, isLocale, type Locale } from '../../i18n/config';
-import { workIndexPath } from '../../i18n/paths';
+import { sitePath, workIndexPath } from '../../i18n/paths';
 import { useUi } from '../../i18n/ui';
 import { workForLocale } from '../../i18n/work';
+import { assetUrl, cssAssetUrl } from '../../utils/assetUrl';
+
+const noiseLayer = cssAssetUrl('/assets/backgrounds/noise.png');
 
 export function getStaticPaths() {
 	return locales.map((lang) => ({ params: { lang } }));
@@ -20,7 +23,7 @@ export function getStaticPaths() {
 
 const langParam = Astro.params.lang;
 if (!isLocale(langParam)) {
-	return Astro.redirect('/pt/');
+	return Astro.redirect(sitePath('pt/'));
 }
 const lang: Locale = langParam;
 const t = useUi(lang);
@@ -45,7 +48,7 @@ const projects = workForLocale(allWork, lang)
 					</div>
 				</Hero>
 
-				<img alt={t.portraitAlt} width="480" height="620" src="/assets/portrait.jpg" />
+				<img alt={t.portraitAlt} width="480" height="620" src={assetUrl('/assets/portrait.jpg')} />
 			</header>
 
 			<Skills lang={lang} />
@@ -61,15 +64,15 @@ const projects = workForLocale(allWork, lang)
 				<div class="certifications">
 
 				<div class="databricks">
-					<img src="/assets/databricks-de-associate-certification.png" alt="Databricks Data Engineer Associate">
-					<img src="/assets/databricks-de-professional-certification.png" alt="Databricks Data Engineer Professional">
-					<img src="/assets/databricks-da-associate-certification.png" alt="Databricks Data Analyst Associate">
-					<img src="/assets/databricks-mlengineer-associate-certification.png" alt="Databricks ML Engineer Associate">
-					<img src="/assets/databricks-fundamentals-certification.png" alt="Databricks Fundamentals">
-					<img src="/assets/snowprocore-certification.png" alt="Snowflake SnowPro Core">
-					<img src="/assets/gcp-certification.png" alt="Google Cloud Engineer">
-					<img src="/assets/aws-cloud-practitioner-certification.png" alt="AWS Cloud Practitioner">
-					<img src="/assets/aws-technical-essentials-certification.png" alt="AWS Technical Essentials">
+					<img src={assetUrl('/assets/databricks-de-associate-certification.png')} alt="Databricks Data Engineer Associate">
+					<img src={assetUrl('/assets/databricks-de-professional-certification.png')} alt="Databricks Data Engineer Professional">
+					<img src={assetUrl('/assets/databricks-da-associate-certification.png')} alt="Databricks Data Analyst Associate">
+					<img src={assetUrl('/assets/databricks-mlengineer-associate-certification.png')} alt="Databricks ML Engineer Associate">
+					<img src={assetUrl('/assets/databricks-fundamentals-certification.png')} alt="Databricks Fundamentals">
+					<img src={assetUrl('/assets/snowprocore-certification.png')} alt="Snowflake SnowPro Core">
+					<img src={assetUrl('/assets/gcp-certification.png')} alt="Google Cloud Engineer">
+					<img src={assetUrl('/assets/aws-cloud-practitioner-certification.png')} alt="AWS Cloud Practitioner">
+					<img src={assetUrl('/assets/aws-technical-essentials-certification.png')} alt="AWS Technical Essentials">
 				</div>
 
 				</div>
@@ -87,35 +90,35 @@ const projects = workForLocale(allWork, lang)
 						<div class="stack-grid">
 							<div class="stack-card">
 								<img 
-									src="/assets/aws-logo.png" 
+									src={assetUrl('/assets/aws-logo.png')} 
 									alt="AWS" 
 									style="width: 2.75em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/azure-logo.png" 
+									src={assetUrl('/assets/azure-logo.png')} 
 									alt="Azure" 
 									style="width: 5em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/gcp-logo.png" 
+									src={assetUrl('/assets/gcp-logo.png')} 
 									alt="GCP" 
 									style="width: 3.25em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/kubernetes-logo.png" 
+									src={assetUrl('/assets/kubernetes-logo.png')} 
 									alt="Kubernetes" 
 									style="width: 3.25em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/docker-logo.png"
+									src={assetUrl('/assets/docker-logo.png')}
 									alt="Docker" 
 									style="width: 5em; height: 2.75em;"
 								/>
@@ -128,56 +131,56 @@ const projects = workForLocale(allWork, lang)
 						<div class="stack-grid">
 							<div class="stack-card">
 								<img
-									src="/assets/python-logo.png" 
+									src={assetUrl('/assets/python-logo.png')} 
 									alt="Python" 
 									style="width: 2em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/spark-logo.jpg" 
+									src={assetUrl('/assets/spark-logo.jpg')} 
 									alt="AWS" 
 									style="width: 2.75em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/databricks-logo.png" 
+									src={assetUrl('/assets/databricks-logo.png')} 
 									alt="AWS" 
 									style="width: 8em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/dbt-logo.png" 
+									src={assetUrl('/assets/dbt-logo.png')} 
 									alt="AWS" 
 									style="width: 4em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/airflow-logo.png" 
+									src={assetUrl('/assets/airflow-logo.png')} 
 									alt="AWS" 
 									style="width: 6em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/airbyte-logo.png" 
+									src={assetUrl('/assets/airbyte-logo.png')} 
 									alt="Airbyte" 
 									style="width: 7em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/kafka-logo.png" 
+									src={assetUrl('/assets/kafka-logo.png')} 
 									alt="AWS" 
 									style="width: 6em; height: 2.75em;"
 								/>
 								<span></span></div>
 							<div class="stack-card">
 								<img
-									src="/assets/snowflake-logo.png" 
+									src={assetUrl('/assets/snowflake-logo.png')} 
 									alt="Snowflake" 
 									style="width: 6em; height: 2.75em;"
 								/>
@@ -190,28 +193,28 @@ const projects = workForLocale(allWork, lang)
 						<div class="stack-grid">
 							<div class="stack-card">
 								<img 
-									src="/assets/powerbi-logo.png" 
+									src={assetUrl('/assets/powerbi-logo.png')} 
 									alt="Power BI" 
 									style="width: 4em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/looker-logo.png" 
+									src={assetUrl('/assets/looker-logo.png')} 
 									alt="Looker" 
 									style="width: 4em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/metabase-logo.png" 
+									src={assetUrl('/assets/metabase-logo.png')} 
 									alt="Metabase" 
 									style="width: 2.75em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/sql-logo.png" 
+									src={assetUrl('/assets/sql-logo.png')} 
 									alt="SQL" 
 									style="width: 3.25em; height: 2.75em;"
 								/>
@@ -224,14 +227,14 @@ const projects = workForLocale(allWork, lang)
 						<div class="stack-grid">
 							<div class="stack-card">
 								<img 
-									src="/assets/mlflow-logo.png" 
+									src={assetUrl('/assets/mlflow-logo.png')} 
 									alt="Mlflow" 
 									style="width: 4em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/dab-logo.png" 
+									src={assetUrl('/assets/dab-logo.png')} 
 									alt="Databricks Asset Bundles" 
 									style="width: 4em; height: 2.75em;"
 								/>
@@ -244,35 +247,35 @@ const projects = workForLocale(allWork, lang)
 						<div class="stack-grid">
 							<div class="stack-card">
 								<img 
-									src="/assets/prometheus-logo.png" 
+									src={assetUrl('/assets/prometheus-logo.png')} 
 									alt="Prometheus" 
 									style="width: 5em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/grafana-logo.png" 
+									src={assetUrl('/assets/grafana-logo.png')} 
 									alt="Grafana" 
 									style="width: 3.25em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/jenkins-logo.png" 
+									src={assetUrl('/assets/jenkins-logo.png')} 
 									alt="Jenkins" 
 									style="width: 2.75em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/github-actions-logo.png" 
+									src={assetUrl('/assets/github-actions-logo.png')} 
 									alt="Github Actions"
 									style="width: 2.75em; height: 2.75em;"
 								/>
 							</div>
 							<div class="stack-card">
 								<img 
-									src="/assets/bitbucket-pipelines-logo.png" 
+									src={assetUrl('/assets/bitbucket-pipelines-logo.png')} 
 									alt="Bitbucket Pipelines" 
 									style="width: 2.75em; height: 2.75em;"
 								/>
@@ -312,7 +315,7 @@ const projects = workForLocale(allWork, lang)
 	</div>
 </BaseLayout>
 
-<style>
+<style define:vars={{ noiseLayer }}>
 	.hero {
 		display: flex;
 		flex-direction: column;
@@ -382,7 +385,7 @@ const projects = workForLocale(allWork, lang)
 		top: 0;
 		transform: translateY(-75%) translateX(-50%);
 		background:
-			url('/assets/backgrounds/noise.png') top center/220px repeat,
+			var(--noiseLayer) top center/220px repeat,
 			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
 			var(--gray-999);
 		background-blend-mode: overlay, normal, normal, normal;

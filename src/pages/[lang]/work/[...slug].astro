@@ -7,7 +7,8 @@ import Icon from '../../../components/Icon.astro';
 import Pill from '../../../components/Pill.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { isLocale, type Locale } from '../../../i18n/config';
-import { workIndexPath } from '../../../i18n/paths';
+import { sitePath, workIndexPath } from '../../../i18n/paths';
+import { assetUrl } from '../../../utils/assetUrl';
 import { useUi } from '../../../i18n/ui';
 import { workLocaleFromId, workSlugFromId } from '../../../i18n/work';
 
@@ -29,7 +30,7 @@ export async function getStaticPaths() {
 
 const langParam = Astro.params.lang;
 if (!isLocale(langParam)) {
-	return Astro.redirect('/pt/work/');
+	return Astro.redirect(sitePath('pt/work/'));
 }
 const lang: Locale = langParam;
 
@@ -57,7 +58,7 @@ const t = useUi(lang);
 			</header>
 			<main class="wrapper">
 				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					{entry.data.img && <img src={assetUrl(entry.data.img)} alt={entry.data.img_alt || ''} />}
 					<div class="content">
 						<Content />
 					</div>

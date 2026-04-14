@@ -6,6 +6,7 @@ import Hero from '../../../components/Hero.astro';
 import PortfolioPreview from '../../../components/PortfolioPreview.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { locales, isLocale, type Locale } from '../../../i18n/config';
+import { sitePath } from '../../../i18n/paths';
 import { useUi } from '../../../i18n/ui';
 import { workForLocale } from '../../../i18n/work';
 
@@ -15,7 +16,7 @@ export function getStaticPaths() {
 
 const langParam = Astro.params.lang;
 if (!isLocale(langParam)) {
-	return Astro.redirect('/pt/work/');
+	return Astro.redirect(sitePath('pt/work/'));
 }
 const lang: Locale = langParam;
 const t = useUi(lang);
