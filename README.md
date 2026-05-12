@@ -1,30 +1,51 @@
-# Astro Starter Kit: Portfolio
+# Portfolio
+
+Personal portfolio site built with [Astro](https://astro.build). Bilingual content (Portuguese and English), project pages in Markdown, and deployment on GitHub Pages.
+
+**Live site:** [https://felipecampelo.github.io/portfolio/](https://felipecampelo.github.io/portfolio/)
+
+## Requirements
+
+- [Node.js](https://nodejs.org/) **22.12** or later
+
+## Local development
 
 ```sh
-npm create astro@latest -- --template portfolio
+npm install
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/portfolio)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/portfolio/devcontainer.json)
+The dev server runs at [http://localhost:4321](http://localhost:4321) (including the configured `base` prefix so it matches GitHub Pages).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Environment variables (optional)
 
-![portfolio](https://user-images.githubusercontent.com/357379/210779178-a98f0fb7-6b1a-4068-894c-8e1403e26654.jpg)
+For Google Analytics, copy the example file and set your measurement ID:
 
-## 🧞 Commands
+```sh
+cp .env.example .env
+```
 
-All commands are run from the root of the project, from a terminal:
+Edit `.env` and set `PUBLIC_GA_MEASUREMENT_ID` to your property value (format `G-XXXXXXXXXX`).
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Scripts
 
-## 👀 Want to learn more?
+| Command           | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the development server         |
+| `npm run build`   | Build the static site to `dist/`     |
+| `npm run preview` | Preview the production build locally |
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Content structure
+
+- **Projects:** Markdown in `src/content/work/pt/` and `src/content/work/en/`, with matching filenames per locale (for example `projeto-analytics-dbt.md`).
+- **Schema:** Fields such as `title`, `description`, `publishDate`, `tags`, `img`, `featured`, and others are defined in `src/content.config.ts`.
+
+The site root `/` redirects to the default locale in `src/i18n/config.ts` (currently English).
+
+## Deploy (GitHub Pages)
+
+`astro.config.mjs` sets `site` and `base` for the `felipecampelo.github.io/portfolio/` repository. If you rename the repository or change the domain, update those values before publishing.
+
+## License
+
+Personal use of this repository; no license file is included.
