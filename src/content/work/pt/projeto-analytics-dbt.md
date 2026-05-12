@@ -20,7 +20,7 @@ featuredOrder: 3
 O ambiente analítico tinha baixa padronização técnica, transformações eram desenvolvidas de forma manual, sem um padrão único de modelagem, sem validações automáticas e com pouca previsibilidade entre ambientes. Isso gerava:
 
 - Dificuldade de escalar novos modelos dbt.
-- Risco de regressões por ausência de contratos e testes.
+- Risco de inconsistência nos dados por ausência de contratos e testes.
 - SQL sem padrões de código e difícil de manter.
 - Diferenças de comportamento entre desenvolvimento, validação e produção.
 - Retrabalho no processo de revisão e produtização.

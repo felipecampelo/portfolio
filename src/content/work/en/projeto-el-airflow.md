@@ -28,7 +28,7 @@ In addition, credentials and sensitive parameters were often exposed in reposito
 
 The solution was split across two complementary repositories:
 
-1. **Declarative EL (extract-load) layer with Meltano**, centralizing pipelines in project files with environments (dev/prod) and Singer connectors, including custom implementations where no ready tap existed for a source. Loads land in Snowflake consistently.
+1. **Declarative EL (extract-load) layer with Meltano**, centralizing pipelines in project files with environments (dev/prod) and Singer connectors, including custom implementations where no ready TAP existed for a source. Loads land in Snowflake consistently.
 
 2. **Orchestration with Apache Airflow in the cloud:** DAGs trigger jobs (for example, Kubernetes pods with a versioned container image), with retries, email alerts, and execution visibility in the Airflow UI.
 
@@ -54,7 +54,7 @@ After the migration, scheduled runs reached roughly <span style="color: #a855f7;
 | Metric | Description |
 |--------|-------------|
 | **Scheduled run success rate** | *Roughly <span style="color: #a855f7;">100%</span> after stabilization.* |
-| **Automation volume** | *Example: <span style="color: #a855f7;">15+</span> orchestration flows in production, <span style="color: #a855f7;">10</span> declarative EL jobs, <span style="color: #a855f7;">5+</span> custom connectors.* |
+| **Automation volume** | *Example: <span style="color: #a855f7;">15+</span> orchestration flows in production, <span style="color: #a855f7;">10+</span> declarative EL jobs, <span style="color: #a855f7;">5+</span> custom connectors.* |
 | **Secret exposure risk** | *<span style="color: #a855f7;">100%</span> of credentials used by DAGs sourced from a managed vault (AWS Secrets Manager), versus plain-text variables before.* |
 | **Maintenance** | *Changes are localized in <span style="color: #a855f7;">one</span> place, reducing time spent per change.* |
 | **Observability** | *Alerts on task failure, history, and retries centralized in Airflow.* |

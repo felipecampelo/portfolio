@@ -71,6 +71,6 @@ Foi implementada execução incremental orientada a mudança para acelerar as pi
 <br />
 ✅ Escalabilidade do time: aumento da capacidade de entrega de novos modelos com menor risco.
 <br />
-✅ Padronização de processo: fluxo único de validação e promoção para diferentes tipos de mudança.
+✅ Padronização de processo: fluxo único de validação e promoção.
 <br />
 ✅ Satisfação do time técnico: analytics engineers passaram a reportar feedbacks consistentemente positivos sobre a nova esteira.

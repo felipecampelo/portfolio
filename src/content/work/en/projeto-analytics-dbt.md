@@ -20,7 +20,7 @@ featuredOrder: 3
 The analytics environment had weak technical standardization: transformations were built manually, with no single modeling standard, no automatic validation, and limited predictability across environments. That led to:
 
 - Difficulty scaling new dbt models.
-- Regression risk from missing data contracts and tests.
+- Risk of inconsistency from missing data contracts and tests.
 - Unstandardized SQL that was hard to maintain.
 - Inconsistent behavior across dev, validation, and production.
 - Rework in review and productionization.
