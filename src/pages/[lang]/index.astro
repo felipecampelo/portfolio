@@ -29,9 +29,21 @@ const lang: Locale = langParam;
 const t = useUi(lang);
 
 const allWork = await getCollection('work');
-const projects = workForLocale(allWork, lang)
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+const localeWork = workForLocale(allWork, lang);
+const byPublishDesc = (a: (typeof localeWork)[number], b: (typeof localeWork)[number]) =>
+	b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+
+const featured = localeWork
+	.filter((p) => p.data.featured)
+	.sort((a, b) => {
+		const oa = a.data.featuredOrder ?? Number.MAX_SAFE_INTEGER;
+		const ob = b.data.featuredOrder ?? Number.MAX_SAFE_INTEGER;
+		if (oa !== ob) return oa - ob;
+		return byPublishDesc(a, b);
+	})
 	.slice(0, 4);
+
+const projects = featured.length > 0 ? featured : localeWork.sort(byPublishDesc).slice(0, 4);
 ---
 
 <BaseLayout lang={lang} title={t.homeMetaTitle} description={t.homeMetaDescription}>
