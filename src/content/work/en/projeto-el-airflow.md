@@ -12,6 +12,8 @@ tags:
   - Python
   - SQL
   - Snowflake
+featured: true
+featuredOrder: 4
 ---
 
 > The problem

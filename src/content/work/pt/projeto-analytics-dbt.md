@@ -9,6 +9,8 @@ tags:
   - Databricks
   - SQL
   - dbt
+featured: true
+featuredOrder: 3
 ---
 
 > Contexto do problema
