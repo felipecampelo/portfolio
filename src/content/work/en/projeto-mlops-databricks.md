@@ -10,6 +10,8 @@ tags:
   - Python
   - Jenkins
   - CI/CD
+featured: true
+featuredOrder: 2
 ---
 
 > Project context
