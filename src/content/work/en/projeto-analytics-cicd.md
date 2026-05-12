@@ -71,6 +71,6 @@ Change-driven incremental runs were added to speed validation pipelines:
 <br />
 ✅ Team scalability: more new models could be delivered with less risk.
 <br />
-✅ Process standardization: one validation and promotion flow for different change types.
+✅ Process standardization: one validation and promotion flow.
 <br />
 ✅ Strong satisfaction from the technical team: analytics engineers reported consistently positive feedback on the new pipeline.
